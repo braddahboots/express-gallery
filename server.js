@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var gallery = require('./routes/gallery');
 
 //tell express which template engine we are using by NPM module name
 app.set('view engine', 'jade');
