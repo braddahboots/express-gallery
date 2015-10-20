@@ -44,7 +44,36 @@ app.get('/gallery/new', function(req, res) {
   });
 });
 
-app.get('/gallery', function(req, res) {
-
+//post a new image to the image gallery array
+app.post('/gallery', function(req, res) {
+  res.send('New instance of a image to add to gallery');
 });
+
+//renders a form to edit a gallery image by it's :id param
+app.get('/gallery/:id/edit', function(req, res) {
+  res.redner('editImage', {
+    id: req[i].id,
+    submitButtonText: 'Edit Photo'
+  });
+});
+
+//updates a single image by it's :id param
+app.put('/gallery/:id', function(req, res) {
+  res.send('Updates to photo');
+});
+
+//deletes a single image within gallery by it's :id param
+app.delete('/gallery/:id', function(req, res) {
+  res.send('DELETE image');
+});
+
+//create server and listen to address 3000
+var server = app.listen(3000, function() {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Photo gallery server listening at http://%s:%s', host, port);
+});
+
+
 
