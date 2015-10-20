@@ -1,0 +1,23 @@
+{
+  "name": "express-gallery",
+  "version": "0.0.0",
+  "homepage": "https://github.com/braddahboots/express-gallery",
+  "authors": [
+    "BraddahBoots <bryan@thebrocode.io>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.3"
+  }
+}
