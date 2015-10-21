@@ -5,6 +5,12 @@ mixin generateImageGallery(imageGallery)
       .large-4.medium-4.small-12.columns
         .images(data-equalizer-watch='')
           if index > 0
-            img(src= obj.image).image
+            a(href='/gallery/' + obj.id): img(src= obj.image).image
             p= obj.info
             p= obj.link
+
+mixin imageDetails(imageGallery)
+  h4= imageGallery[selectedImage].info
+  img(src= imageGallery[selectedImage].image)
+
+//- create a mixin that creates a column on the right hand side

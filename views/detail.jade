@@ -1,0 +1,11 @@
+//- recieve the mainLayout
+extends ./layouts/mainLayout.jade
+
+include ./mixins/all
+
+block content
+  .row
+    .large-8.medium-8.columns
+      +imageDetails(imageGallery)
+      //- create a mixin to place a column on the right side of the page
+

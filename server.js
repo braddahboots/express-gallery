@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var jade = require('jade');
+var listings = require('./listings');
 // var gallery = require('./routes/gallery');
 
 //tell express which template engine we are using by NPM module name
@@ -15,26 +16,7 @@ app.use(express.static('./public'));
 //root directory will render the list gallery photos located within index
 app.get('/', function(req, res) {
   res.render('index', {
-    imageGallery: [{
-      image: 'http://www.arch2o.com/wp-content/uploads/2013/08/Arch2o-Innovation-Tower-Zaha-Hadid-69.jpg',
-      info: 'Shadow Halls',
-      link: 'www.devleague.com'
-      },
-      {
-        image: 'http://designlike.com/wp-content/uploads/2010/12/baron-buildbaton.jpg',
-        info: 'The Collapsing Building',
-        link: 'www.devleague.com'
-      },
-      {
-        image: 'http://edmonleong1.sites.livebooks.com/data/photos/1300_1r9s7a6078.jpg',
-        info: 'The Something out of Halo Building',
-        link: 'www.devleague.com'
-      },
-      {
-        image:  'http://assets.inhabitat.com/wp-content/blogs.dir/1/files/2013/09/Za-Architects-Heart-of-the-District1.jpg',
-        info: 'Alien Invasion Building',
-        link: 'www.devleague.com'
-      }]
+    imageGallery: listings
   });
 });
 
@@ -43,13 +25,10 @@ app.get('/', function(req, res) {
 //should include a link to edit the specific gallery photo
 app.get('/gallery/:id', function(req, res) {
   var photoId = req.params.id;
-  res.sendFile(photoId, function(err) {
-    if(err) {
-      consol.log(err);
-      res.status(err.status).end();
-    } else {
-      consol.log('Sent:', photoId);
-    }
+  if(photoId !== null)
+  res.render('detail', {
+    imageGallery: listings,
+    selectedImage: photoId
   })
   .delete(function(req, res) {
     res.send('Link to delete image');
@@ -62,7 +41,6 @@ app.get('/gallery/:id', function(req, res) {
 //renders a form that is able to create a new image for the gallery
 app.get('/gallery/new', function(req, res) {
   res.render('index', {
-    imageGallery: [],
     submitButtonText: 'New Photo'
   });
 });
