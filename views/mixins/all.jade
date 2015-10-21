@@ -11,6 +11,21 @@ mixin generateImageGallery(imageGallery)
 
 mixin imageDetails(imageGallery)
   h4= imageGallery[selectedImage].info
+  span= imageGallery[selectedImage].link
   img(src= imageGallery[selectedImage].image)
 
 //- create a mixin that creates a column on the right hand side
+mixin sideColumn(imageGallery, selectedImage)
+  each obj in imageGallery
+    if obj.id !== selectedImage
+      img(src= obj.image)
+      span= obj.info
+      - console.log('testing',obj.id)
+      - console.log('boob', selectedImage)
+      //- img(src= imageGallery[1].image)
+      //- span= imageGallery[1].info
+      //- img(src= imageGallery[2].image)
+      //- span= imageGallery[2].info
+      //- img(src= imageGallery[3].image)
+      //- span= imageGallery[3].info
+      //- div= imageGallery[selectedImage]

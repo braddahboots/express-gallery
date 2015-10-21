@@ -26,16 +26,22 @@ app.get('/', function(req, res) {
 app.get('/gallery/:id', function(req, res) {
   var photoId = req.params.id;
   if(photoId !== null)
-  res.render('detail', {
+
+
+
+
+  //find the photo by its id witin the listing array
+  //then remove from array and store it to a new key
+  res.render('details', {
     imageGallery: listings,
     selectedImage: photoId
-  })
-  .delete(function(req, res) {
-    res.send('Link to delete image');
-  })
-  .put(function(req, res) {
-    res.send('Link to update image');
   });
+  // .delete(function(req, res) {
+  //   res.send('Link to delete image');
+  // })
+  // .put(function(req, res) {
+  //   res.send('Link to update image');
+  // });
 });
 
 //renders a form that is able to create a new image for the gallery
