@@ -31,25 +31,24 @@ app.get('/', function(req, res) {
 //should include a link to edit the specific gallery photo
 app.get('/gallery/:id', function(req, res) {
   var photoId = req.params.id;
-  var photoIndex = req.params.id-1;
-  if(photoId !== null)
-    Gallery.findAll()
-      .then(function(gallery){
-        // console.log(gallery);
-        res.render('details', {
-          imageGallery: gallery.filter(function(obj) {return obj.id == photoId;})[0],
-          shuffleGallery: _.shuffle(gallery),
-          selectedImage: photoId
-        });
+  Gallery.findOne({
+    where : {
+      id : photoId
+    }
+  })
+  .then(function(hero_image){
+    Gallery.findAll({
+      limit : 4
+    })
+    .then(function(gallery){
+      res.render('details', {
+        heroImage: hero_image,
+        // gallery.filter(function(obj) {return obj.id == photoId;})[0],
+        shuffleGallery: _.shuffle(gallery),
+        selectedImage: photoId
       });
-  //find the photo by its id witin the listing array
-  //then remove from array and store it to a new key
-  // .delete(function(req, res) {
-  //   res.send('Link to delete image');
-  // })
-  // .put(function(req, res) {
-  //   res.send('Link to update image');
-  // });
+    });
+  });
 });
 
 //renders a form that is able to create a new image for the gallery

@@ -10,10 +10,10 @@ mixin generateImageGallery(imageGallery)
             p= obj.link
 
 //- populate the image that users click on from home page - should be hero image
-mixin imageDetails(imageGallery)
-  h4= imageGallery.info
-  span= imageGallery.link
-  img(src= imageGallery.image)
+mixin imageDetails(heroImage)
+  h4= heroImage.info
+  span= heroImage.link
+  img(src= heroImage.image)
 
 //- creates side bar
 //- should have a limit of only 3 images
