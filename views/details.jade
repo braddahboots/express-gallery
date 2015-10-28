@@ -6,6 +6,7 @@ include ./mixins/all
 block content
   .row
     .large-8.medium-8.columns
+      a.button(href="/gallery/new") Add New Image
       +imageDetails(heroImage)
     .large-4.medium-4.columns
       +sideColumn(shuffleGallery, selectedImage)

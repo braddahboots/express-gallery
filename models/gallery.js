@@ -28,6 +28,11 @@ Gallery.sync({force: true})
       image: 'http://assets.inhabitat.com/wp-content/blogs.dir/1/files/2013/09/Za-Architects-Heart-of-the-District1.jpg',
       info: 'Alien Invasion Building',
       link: 'www.devleague.com',
+    }),
+    Gallery.create({
+      image: 'https://s-media-cache-ak0.pinimg.com/736x/8d/27/d1/8d27d1dff702bff0cc457fc5c5eec737.jpg',
+      info: 'Random Image',
+      link: 'www.devleague.com',
     });
   });
 

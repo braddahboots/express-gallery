@@ -26,6 +26,13 @@ app.get('/', function(req, res) {
     });
 });
 
+//renders a form that is able to create a new image for the gallery
+app.get('/gallery/new', function(req, res) {
+  res.render('newPhoto', {
+    submitButtonText: 'New Photo'
+  });
+});
+
 //when routed to gallery/:id the user will see a single image
 //should include a link to delete the photo from the gallery
 //should include a link to edit the specific gallery photo
@@ -38,7 +45,12 @@ app.get('/gallery/:id', function(req, res) {
   })
   .then(function(hero_image){
     Gallery.findAll({
-      limit : 4
+      where : {
+        id : {
+          ne : hero_image.id
+        }
+      },
+      limit : 3
     })
     .then(function(gallery){
       res.render('details', {
@@ -51,24 +63,19 @@ app.get('/gallery/:id', function(req, res) {
   });
 });
 
-//renders a form that is able to create a new image for the gallery
-app.get('/gallery/new', function(req, res) {
-  res.render('index', {
-    submitButtonText: 'New Photo'
-  });
-});
-
 //post a new image to the image gallery array
 app.post('/gallery', function(req, res) {
-  res.send('New instance of a image to add to gallery');
-});
-
-//renders a form to edit a gallery image by it's :id param
-app.get('/gallery/:id/edit', function(req, res) {
-  res.redner('editImage', {
-    id: req[i].id,
-    submitButtonText: 'Edit Photo'
+  Gallery.create({
+    image: req.body.url,
+    info: req.body.info,
+    link: req.body.link
+  })
+  .then(function(gallery) {
+    res.render('index', {
+      imageGallery: gallery
+    });
   });
+  res.send('New instance of a image to add to gallery');
 });
 
 //updates a single image by it's :id param
@@ -80,6 +87,16 @@ app.put('/gallery/:id', function(req, res) {
 app.delete('/gallery/:id', function(req, res) {
   res.send('DELETE image');
 });
+
+
+//renders a form to edit a gallery image by it's :id param
+app.get('/gallery/:id/edit', function(req, res) {
+  res.redner('editImage', {
+    id: req[i].id,
+    submitButtonText: 'Edit Photo'
+  });
+});
+
 
 //create server and listen to address 3000
 var server = app.listen(3000, function() {

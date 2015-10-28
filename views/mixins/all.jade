@@ -20,6 +20,5 @@ mixin imageDetails(heroImage)
 //- should not include hero image as selection
 mixin sideColumn(shuffleGallery, selectedImage)
   each obj in shuffleGallery
-    if obj.id != selectedImage
-      img(src= obj.image)
-      span= obj.info
+    img(src= obj.image)
+    span= obj.info
