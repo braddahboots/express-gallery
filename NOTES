@@ -1,0 +1,13 @@
+NOTES
+ - Details.Jade
+  - Hero Image
+    - Able to populate image and columns along with header
+    - Working towards refactoring code on server.js to push the object of the image we are calling on and assigning that object to a new key. (remove it from the array being passed into the argument).
+    - Goal for this is to seperate image clicked on to the space reserved for the hero image.
+  - Columns
+    - Once hero image is removed from array we need to populate at random only 3 indexes. This will be random on every details page.
+- Things left to do
+  - Routes
+  - Add images
+  - Edit images
+  - Delete images

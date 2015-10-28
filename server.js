@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var jade = require('jade');
 var listings = require('./listings');
+var db = require('./models');
+var Gallery = db.gallery;
 // var gallery = require('./routes/gallery');
 
 //tell express which template engine we are using by NPM module name
@@ -15,9 +17,12 @@ app.use(express.static('./public'));
 
 //root directory will render the list gallery photos located within index
 app.get('/', function(req, res) {
-  res.render('index', {
-    imageGallery: listings
-  });
+  Gallery.findAll()
+    .then(function(gallery){
+      res.render('index', {
+        imageGallery: gallery,
+      });
+    });
 });
 
 //when routed to gallery/:id the user will see a single image
@@ -25,6 +30,7 @@ app.get('/', function(req, res) {
 //should include a link to edit the specific gallery photo
 app.get('/gallery/:id', function(req, res) {
   var photoId = req.params.id;
+  console.log('Testing', photoId);
   if(photoId !== null)
 
 
