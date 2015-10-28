@@ -4,6 +4,7 @@ var jade = require('jade');
 var listings = require('./listings');
 var db = require('./models');
 var Gallery = db.gallery;
+var _ = require('lodash');
 // var gallery = require('./routes/gallery');
 
 //tell express which template engine we are using by NPM module name
@@ -30,18 +31,19 @@ app.get('/', function(req, res) {
 //should include a link to edit the specific gallery photo
 app.get('/gallery/:id', function(req, res) {
   var photoId = req.params.id;
-  console.log('Testing', photoId);
+  var photoIndex = req.params.id-1;
   if(photoId !== null)
-
-
-
-
+    Gallery.findAll()
+      .then(function(gallery){
+        // console.log(gallery);
+        res.render('details', {
+          imageGallery: gallery.filter(function(obj) {return obj.id == photoId;})[0],
+          shuffleGallery: _.shuffle(gallery),
+          selectedImage: photoId
+        });
+      });
   //find the photo by its id witin the listing array
   //then remove from array and store it to a new key
-  res.render('details', {
-    imageGallery: listings,
-    selectedImage: photoId
-  });
   // .delete(function(req, res) {
   //   res.send('Link to delete image');
   // })
