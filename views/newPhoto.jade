@@ -1,16 +1,10 @@
 //- //receive the mainLayout
 extends ./layouts/mainLayout.jade
 
+include ./mixins/all
+
 block content
   form(action="/gallery" method="POST")
     .row
       .large-6.large-offset-3.columns
-        label Picture URL
-          input(type="text" name="url" placeholder="...")
-        label Title
-          input(type="text" name="info" placeholder="...")
-        label Link
-          input(type="text" name="link" placeholder="...")
-          button POST
-        //- label Long Description
-        //-   textarea(type="text" name="longDesc" placeholder="...")
+      +newPhotoAdd()

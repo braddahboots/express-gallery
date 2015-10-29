@@ -10,10 +10,13 @@ mixin generateImageGallery(imageGallery)
             p= obj.link
 
 //- populate the image that users click on from home page - should be hero image
-mixin imageDetails(heroImage)
+mixin mainHeroImage(heroImage)
   h4= heroImage.info
   span= heroImage.link
   img(src= heroImage.image)
+  form(action='/gallery/#{heroImage.id}' method='POST' enctype="application/x-www-form-urlencoded")
+    input(type='hidden' name='_method' value='DELETE')
+    button DELETE
 
 //- creates side bar
 //- should have a limit of only 3 images
@@ -22,3 +25,14 @@ mixin sideColumn(shuffleGallery, selectedImage)
   each obj in shuffleGallery
     img(src= obj.image)
     span= obj.info
+
+mixin newPhotoAdd
+      label Picture URL
+        input(type="text" name="url" placeholder="...")
+      label Title
+        input(type="text" name="info" placeholder="...")
+      label Link
+        input(type="text" name="link" placeholder="...")
+      button POST
+      //- label Long Description
+      //-   textarea(type="text" name="longDesc" placeholder="...")
