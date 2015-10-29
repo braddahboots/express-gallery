@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var db = require('./models');
 var Gallery = db.gallery;
+var User = db.users;
 var _ = require('lodash');
 var bodyParser = require('body-parser');
 var galleryRouter = require('./routes/gallery');
@@ -10,6 +11,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var ensureAuthenticated = require('./lib');
 
 //tell express which template engine we are using by NPM module name
 app.set('view engine', 'jade');
@@ -59,8 +61,13 @@ passport.deserializeUser(function(obj, done) {
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
+    User.findOne({
+      where : {
+        username: username
+      }
+    })
+    .then(function (user) {
+      console.log('user', user);
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
@@ -87,15 +94,16 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-function ensureAuthenticated(req, res, next) {
-  if(req.isAuthenticated()) {return next(); }
-  res.redirect('/login');
-}
+// function ensureAuthenticated(req, res, next) {
+//   if(req.isAuthenticated()) {return next(); }
+//   res.redirect('/login');
+// }
 
 //root directory will render the list gallery photos located within index
-app.get('/', ensureAuthenticated, function(req, res) {
+app.get('/', function(req, res) {
   Gallery.findAll()
     .then(function(gallery){
+      console.log('gallery', gallery);
       res.render('index', {
         imageGallery: gallery
       });
@@ -104,18 +112,4 @@ app.get('/', ensureAuthenticated, function(req, res) {
 
 //create server and listen to address 3000
 var server = app.listen(3000, function() {});
-
-var User = {
-  findOne : function (opts, cb) {
-    var user = {
-      id : 1,
-      username: opts.username,
-      password: 'hello',
-      //look up instance method for validPassword - maybe also look up dynamic field
-      validPassword: function(password) {
-        return (password === 'hello');
-      }
-    };
-    cb(null, user);
-  }
-};
+db.sequelize.sync();

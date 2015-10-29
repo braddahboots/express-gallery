@@ -1,23 +1,18 @@
 //File path: {{project_directory}}/routes/gallery.js
 var express = require('express');
-var app = express();
 var router = express.Router();
 var db = require('./../models');
 var Gallery = db.gallery;
+var User = db.users;
 var _ = require('lodash');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+var ensureAuthenticated = require('./../lib');
 
-//unable to get this working
-function ensureAuthenticated(req, res, next) {
-  if(req.isAuthnticated()) {return next(); }
-  res.redirect('/gallery/login');
-}
 //GET http://localhost:3000/gallery
 //post a new image to the image gallery array
 //renders a form that is able to create a new image for the gallery
 router.route('/new')
-  .get(function(req, res) {
+  .get(ensureAuthenticated, function(req, res) {
     res.render('newPhoto', {});
 });
 
@@ -51,12 +46,13 @@ router.route('/:id')
       });
     });
   })
-  .put(function(req, res) {
+  .put(ensureAuthenticated, function(req, res) {
     var photoId = req.params.id;
     Gallery.update({
       image: req.body.url,
-      info: req.body.info,
-      link: req.body.link
+      title: req.body.title,
+      link: req.body.link,
+      info: req.body.info
     }, {
       where : {
         id : photoId
@@ -66,7 +62,7 @@ router.route('/:id')
       res.redirect('/gallery/' + photoId);
     });
   })
-  .delete(function(req, res) {
+  .delete(ensureAuthenticated, function(req, res) {
     var photoId = req.params.id;
     Gallery.destroy({
       where : {
@@ -83,7 +79,7 @@ router.route('/')
   .post(function(req, res) {
     Gallery.create({
       image: req.body.url,
-      info: req.body.info,
+      title: req.body.title,
       link: req.body.link
     })
     .then(function(gallery) {
@@ -93,7 +89,7 @@ router.route('/')
 
 //renders a form to edit a gallery image by it's :id param
 router.route('/:id/edit')
-  .get(function(req, res) {
+  .get(ensureAuthenticated, function(req, res) {
     var photoId = req.params.id;
     Gallery.findOne({
       where : {
@@ -105,8 +101,9 @@ router.route('/:id/edit')
         selectedImage : {
           id: thisObj.id,
           image: thisObj.image,
-          info: thisObj.info,
-          link: thisObj.link
+          title: thisObj.title,
+          link: thisObj.link,
+          info: thisObj.info
         }
       });
     });

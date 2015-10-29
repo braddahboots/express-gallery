@@ -1,3 +1,4 @@
+//- creates the login page format
 mixin userLogin
   form(action='/login' method='POST')
     div
@@ -5,10 +6,11 @@ mixin userLogin
       input(type='text' name='username')
     div
     label Password:
-      input(type='text' name='password')
+      input(type='password' name='password')
     div
-    input(type='submit' value='Log In')
+    button.round.tiny Login
 
+//- creates the landing page format
 mixin generateImageGallery(imageGallery)
   .row(data-equalizer='', data-equalizer-mq='large-up')
     div#imageRow
@@ -17,48 +19,53 @@ mixin generateImageGallery(imageGallery)
         .images(data-equalizer-watch='')
           if index > 0
             a(href='/gallery/' + obj.id): img(src= obj.image).image
-            p= obj.info
-            p= obj.link
+            span.details= obj.title
+            span.details= obj.link
 
-//- populate the image that users click on from home page - should be hero image
+//- create the details page with hero image and column
 mixin mainHeroImage(heroImage)
-  a.button(href='/gallery/new') Add New Image
-  h4= heroImage.info
+  a.button.round.tiny(href='/gallery/new') Add New Image
+  h4= heroImage.title
   span= heroImage.link
   img(src= heroImage.image)
-  a.button(href='/gallery/#{heroImage.id}/edit') Edit Image
+  p= heroImage.info
+  a.button.info.round.tiny(href='/gallery/#{heroImage.id}/edit') Edit Image
   form(action='/gallery/#{heroImage.id}' method='POST' enctype="application/x-www-form-urlencoded")
     input(type='hidden' name='_method' value='DELETE')
-    button DELETE
+    button.alert.round.tiny DELETE
 
-//- creates side bar
-//- should have a limit of only 3 images
-//- should not include hero image as selection
+//- creates the side column on details page
 mixin sideColumn(shuffleGallery, selectedImage)
   each obj in shuffleGallery
       a(href='/gallery/' + obj.id): img(src= obj.image).image
-      p= obj.info
-      p= obj.link
+      span.details= obj.title
+      span.details= obj.link
 
+//- creates the edit page format
 mixin editImage(selectedImage)
   .row
     .large-8.large-offset-2.columns
-      h4= selectedImage.info
+      h4= selectedImage.title
       span= selectedImage.link
       img(src= selectedImage.image)
+      p= selectedImage.info
       form(action="/gallery/#{selectedImage.id}" method="POST" enctype="application/x-www-form-urlencoded")
         div
         label Picture URL
           input(type="text" name="url" placeholder="...")
         div
         label Title
-          input(type="text" name="info" placeholder="...")
+          input(type="text" name="title" placeholder="...")
         div
         label Link
           input(type="text" name="link" placeholder="...")
           input(type='hidden' name='_method' value='PUT')
         div
-        button Edit
+        label Description
+          input(type="text" name="info" placeholder="...")
+          input(type='hidden' name='_method' value='PUT')
+        div
+        button.round.tiny.success Edit
 
 //- add new photo to the database and populate to client
 mixin newPhotoAdd
@@ -67,11 +74,12 @@ mixin newPhotoAdd
         input(type="text" name="url" placeholder="...")
       div
       label Title
-        input(type="text" name="info" placeholder="...")
+        input(type="text" name="title" placeholder="...")
       div
       label Link
         input(type="text" name="link" placeholder="...")
       div
-      button POST
-      //- label Long Description
-      //-   textarea(type="text" name="longDesc" placeholder="...")
+      label Description
+        textarea(type="text" name="info" placeholder="...")
+      div
+      button.round.tiny.success POST

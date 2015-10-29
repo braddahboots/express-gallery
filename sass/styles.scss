@@ -1,41 +1,8 @@
 @import 'partials/_settings';
 @import 'foundation/components/grid';
-// @import 'foundation/components/accordion';
-// @import 'foundation/components/alert-boxes';
-// @import 'foundation/components/block-grid';
-// @import 'foundation/components/breadcrumbs';
 @import 'foundation/components/button-groups';
 @import 'foundation/components/buttons';
-// @import 'foundation/components/clearing';
-// @import 'foundation/components/dropdown';
-// @import 'foundation/components/dropdown-buttons';
-// @import 'foundation/components/flex-video';
-// @import 'foundation/components/forms';
-// @import 'foundation/components/icon-bar';
-// @import 'foundation/components/inline-lists';
-// @import 'foundation/components/joyride';
-// @import 'foundation/components/keystrokes';
-// @import 'foundation/components/labels';
-// @import 'foundation/components/magellan';
-// @import 'foundation/components/orbit';
-// @import 'foundation/components/pagination';
-// @import 'foundation/components/panels';
-// @import 'foundation/components/pricing-tables';
-// @import 'foundation/components/progress-bars';
-// @import 'foundation/components/range-slider';
-// @import 'foundation/components/reveal';
-// @import 'foundation/components/side-nav';
-// @import 'foundation/components/split-buttons';
-// @import 'foundation/components/sub-nav';
-// @import 'foundation/components/switches';
-// @import 'foundation/components/tables';
-// @import 'foundation/components/tabs';
-// @import 'foundation/components/thumbs';
-// @import 'foundation/components/tooltips';
-// @import 'foundation/components/top-bar';
-// @import 'foundation/components/type';
-// @import 'foundation/components/offcanvas';
-// @import 'foundation/components/visibility';
+
 
 
 $LightColor: #C7C7C7;
@@ -43,15 +10,14 @@ $DarkColor: #7E797F;
 
 // =========================Header Styles=====================
 
-body {
-  margin-top: 5px;
-  border-top: 2px dashed $LightColor;
-}
+// body {
+//   margin-top: 5px;
+//   border-top: 2px dashed $LightColor;
+// }
 
 h1 {
-  font-size: 70px;
+  font-size: 60px;
   color: $DarkColor;
-  margin: 0px;
   text-align: center;
 }
 
@@ -65,7 +31,7 @@ h1 {
 p.head {
   margin-top: 5px;
   // border-left: 2px dashed $LightColor;
-  font-size: 14px;
+  font-size: 9px;
   color: $LightColor;
   text-align: left;
 }
@@ -85,3 +51,15 @@ p.head {
   height: 200px;
   width: 400px;
 }
+
+.details {
+  display: block;
+  text-align: center;
+}
+
+//=====================Details Page Hero Styles=================
+h4 {
+  margin: 0px;
+}
+
+//=====================Details Page Side Column Styles=================
