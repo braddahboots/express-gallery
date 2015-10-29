@@ -1,3 +1,14 @@
+mixin userLogin
+  form(action='/login' method='POST')
+    div
+    label Username:
+      input(type='text' name='username')
+    div
+    label Password:
+      input(type='text' name='password')
+    div
+    input(type='submit' value='Log In')
+
 mixin generateImageGallery(imageGallery)
   .row(data-equalizer='', data-equalizer-mq='large-up')
     div#imageRow
@@ -14,8 +25,8 @@ mixin mainHeroImage(heroImage)
   a.button(href='/gallery/new') Add New Image
   h4= heroImage.info
   span= heroImage.link
-  a.button(href='/gallery/#{heroImage.id}/edit') Edit Image
   img(src= heroImage.image)
+  a.button(href='/gallery/#{heroImage.id}/edit') Edit Image
   form(action='/gallery/#{heroImage.id}' method='POST' enctype="application/x-www-form-urlencoded")
     input(type='hidden' name='_method' value='DELETE')
     button DELETE
@@ -25,30 +36,42 @@ mixin mainHeroImage(heroImage)
 //- should not include hero image as selection
 mixin sideColumn(shuffleGallery, selectedImage)
   each obj in shuffleGallery
-    img(src= obj.image)
-    span= obj.info
+      a(href='/gallery/' + obj.id): img(src= obj.image).image
+      p= obj.info
+      p= obj.link
 
 mixin editImage(selectedImage)
-  form(action="/gallery/#{selectedImage.id}" method="POST" enctype="application/x-www-form-urlencoded")
-    .row
-      .large-6.large-offset-3.columns
+  .row
+    .large-8.large-offset-2.columns
+      h4= selectedImage.info
+      span= selectedImage.link
+      img(src= selectedImage.image)
+      form(action="/gallery/#{selectedImage.id}" method="POST" enctype="application/x-www-form-urlencoded")
+        div
         label Picture URL
           input(type="text" name="url" placeholder="...")
+        div
         label Title
           input(type="text" name="info" placeholder="...")
+        div
         label Link
           input(type="text" name="link" placeholder="...")
           input(type='hidden' name='_method' value='PUT')
+        div
         button Edit
 
 //- add new photo to the database and populate to client
 mixin newPhotoAdd
+      div
       label Picture URL
         input(type="text" name="url" placeholder="...")
+      div
       label Title
         input(type="text" name="info" placeholder="...")
+      div
       label Link
         input(type="text" name="link" placeholder="...")
+      div
       button POST
       //- label Long Description
       //-   textarea(type="text" name="longDesc" placeholder="...")

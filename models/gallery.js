@@ -10,29 +10,39 @@ module.exports = function(sequelize, DataTypes) {
 Gallery.sync({force: true})
   .then(function() {
     return Gallery.create({
-      image: 'http://www.arch2o.com/wp-content/uploads/2013/08/Arch2o-Innovation-Tower-Zaha-Hadid-69.jpg',
-      info: 'Shadow Halls',
-      link: 'www.devleague.com',
+      image: 'http://wallpaperfullscreen.com/wp-content/uploads/2015/03/Hawaii-Amazing-Sunset-Island-Wallpaper-HD.jpg',
+      info: 'Heaven',
+      link: 'www.getHi.com',
     }),
     Gallery.create({
-      image: 'http://designlike.com/wp-content/uploads/2010/12/baron-buildbaton.jpg',
-      info: 'The Collapsing Building',
-      link: 'www.devleague.com',
+      image: 'http://www.hawaiiluxurynews.com/HLN/wp-content/uploads/2013/09/rainbowwhale.jpg',
+      info: "Whale's and Rainbows",
+      link: 'www.getHi.com',
     }),
     Gallery.create({
-      image: 'http://edmonleong1.sites.livebooks.com/data/photos/1300_1r9s7a6078.jpg',
-      info: 'The Something out of Halo Building',
-      link: 'www.devleague.com',
+      image: 'http://7-themes.com/data_images/out/19/6832733-hawaii-wallpaper.jpg',
+      info: 'Sunset Blvd',
+      link: 'www.getHi.com',
     }),
     Gallery.create({
-      image: 'http://assets.inhabitat.com/wp-content/blogs.dir/1/files/2013/09/Za-Architects-Heart-of-the-District1.jpg',
-      info: 'Alien Invasion Building',
-      link: 'www.devleague.com',
+      image: 'http://www.pixgel.com/wp-content/uploads/2013/09/Hawaii-Beach-1280x960.jpg',
+      info: 'Redlights Big City',
+      link: 'www.getHi.com',
     }),
     Gallery.create({
-      image: 'https://s-media-cache-ak0.pinimg.com/736x/8d/27/d1/8d27d1dff702bff0cc457fc5c5eec737.jpg',
-      info: 'Random Image',
-      link: 'www.devleague.com',
+      image: 'http://hawaiianplaces.com/wp-content/uploads/2015/07/feat11.jpg',
+      info: 'City Flames',
+      link: 'www.getHi.com',
+    }),
+    Gallery.create({
+      image: 'https://d2fijpsef22722.cloudfront.net/photos/massive/2546426246-maui.jpg',
+      info: 'Waves of Clouds',
+      link: 'www.getHi.com',
+    }),
+    Gallery.create({
+      image: 'http://www.christiangehrke.com/wp-content/uploads/2013/04/maui_beach_waves.jpg',
+      info: 'Secrets',
+      link: 'www.getHi.com',
     });
   });
 

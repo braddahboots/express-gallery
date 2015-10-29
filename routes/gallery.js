@@ -5,7 +5,14 @@ var router = express.Router();
 var db = require('./../models');
 var Gallery = db.gallery;
 var _ = require('lodash');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
+//unable to get this working
+function ensureAuthenticated(req, res, next) {
+  if(req.isAuthnticated()) {return next(); }
+  res.redirect('/gallery/login');
+}
 //GET http://localhost:3000/gallery
 //post a new image to the image gallery array
 //renders a form that is able to create a new image for the gallery
