@@ -11,8 +11,10 @@ mixin generateImageGallery(imageGallery)
 
 //- populate the image that users click on from home page - should be hero image
 mixin mainHeroImage(heroImage)
+  a.button(href='/gallery/new') Add New Image
   h4= heroImage.info
   span= heroImage.link
+  a.button(href='/gallery/#{heroImage.id}/edit') Edit Image
   img(src= heroImage.image)
   form(action='/gallery/#{heroImage.id}' method='POST' enctype="application/x-www-form-urlencoded")
     input(type='hidden' name='_method' value='DELETE')
@@ -26,6 +28,20 @@ mixin sideColumn(shuffleGallery, selectedImage)
     img(src= obj.image)
     span= obj.info
 
+mixin editImage(selectedImage)
+  form(action="/gallery/#{selectedImage.id}" method="POST" enctype="application/x-www-form-urlencoded")
+    .row
+      .large-6.large-offset-3.columns
+        label Picture URL
+          input(type="text" name="url" placeholder="...")
+        label Title
+          input(type="text" name="info" placeholder="...")
+        label Link
+          input(type="text" name="link" placeholder="...")
+          input(type='hidden' name='_method' value='PUT')
+        button Edit
+
+//- add new photo to the database and populate to client
 mixin newPhotoAdd
       label Picture URL
         input(type="text" name="url" placeholder="...")

@@ -11,8 +11,7 @@ var _ = require('lodash');
 //renders a form that is able to create a new image for the gallery
 router.route('/new')
   .get(function(req, res) {
-    res.render('newPhoto', {
-    });
+    res.render('newPhoto', {});
 });
 
 //when routed to gallery/:id the user will see a single image
@@ -45,7 +44,21 @@ router.route('/:id')
       });
     });
   })
-  // .put(function(req, res) {})
+  .put(function(req, res) {
+    var photoId = req.params.id;
+    Gallery.update({
+      image: req.body.url,
+      info: req.body.info,
+      link: req.body.link
+    }, {
+      where : {
+        id : photoId
+      }
+    })
+    .then(function(gallery) {
+      res.redirect('/gallery/' + photoId);
+    });
+  })
   .delete(function(req, res) {
     var photoId = req.params.id;
     Gallery.destroy({
@@ -74,9 +87,21 @@ router.route('/')
 //renders a form to edit a gallery image by it's :id param
 router.route('/:id/edit')
   .get(function(req, res) {
-    res.redner('editImage', {
-      id: req[i].id,
-      submitButtonText: 'Edit Photo'
+    var photoId = req.params.id;
+    Gallery.findOne({
+      where : {
+        id : photoId
+      }
+    })
+    .then(function(thisObj) {
+      res.render('editImage', {
+        selectedImage : {
+          id: thisObj.id,
+          image: thisObj.image,
+          info: thisObj.info,
+          link: thisObj.link
+        }
+      });
     });
 });
 
