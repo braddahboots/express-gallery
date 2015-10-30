@@ -2066,44 +2066,44 @@ button::-moz-focus-inner {
   .button-bar .button-group div {
     overflow: hidden; }
 
-/* line 18, stdin */
+/* line 17, stdin */
 h1 {
   font-size: 60px;
   color: #7E797F;
   text-align: center; }
 
 @media only screen and (min-width: 64.0625em) {
-  /* line 24, stdin */
+  /* line 23, stdin */
   .separator {
     border-left: 2px dashed #C7C7C7;
     padding-left: 20px; } }
 
-/* line 31, stdin */
+/* line 30, stdin */
 p.head {
   margin-top: 5px;
   font-size: 9px;
   color: #C7C7C7;
   text-align: left; }
 
-/* line 41, stdin */
+/* line 40, stdin */
 .row:after {
   margin-bottom: 10px; }
 
-/* line 45, stdin */
+/* line 44, stdin */
 #imageRow {
   padding-top: 15px;
   border-top: 2px dashed #C7C7C7; }
 
-/* line 50, stdin */
+/* line 49, stdin */
 .image {
   height: 200px;
   width: 400px; }
 
-/* line 55, stdin */
+/* line 54, stdin */
 .details {
   display: block;
   text-align: center; }
 
-/* line 61, stdin */
+/* line 60, stdin */
 h4 {
   margin: 0px; }

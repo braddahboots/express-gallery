@@ -39,7 +39,6 @@ router.route('/:id')
       .then(function(gallery) {
         res.render('details', {
           heroImage: hero_image,
-          // gallery.filter(function(obj) {return obj.id == photoId;})[0],
           shuffleGallery: _.shuffle(gallery),
           selectedImage: photoId
         });
@@ -80,7 +79,8 @@ router.route('/')
     Gallery.create({
       image: req.body.url,
       title: req.body.title,
-      link: req.body.link
+      link: req.body.link,
+      info: req.body.info
     })
     .then(function(gallery) {
       res.redirect('/');
