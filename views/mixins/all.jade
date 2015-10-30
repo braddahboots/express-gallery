@@ -9,6 +9,7 @@ mixin userLogin
       input(type='password' name='password')
     div
     button.round.tiny Login
+    button.round.tiney Create Account
 
 //- creates the landing page format
 mixin generateImageGallery(imageGallery)
@@ -23,16 +24,22 @@ mixin generateImageGallery(imageGallery)
             span.details= obj.link
 
 //- create the details page with hero image and column
-mixin mainHeroImage(heroImage)
-  a.button.round.tiny(href='/gallery/new') Add New Image
-  h4= heroImage.title
-  span= heroImage.link
-  img(src= heroImage.image)
-  p= heroImage.info
-  a.button.info.round.tiny(href='/gallery/#{heroImage.id}/edit') Edit Image
-  form(action='/gallery/#{heroImage.id}' method='POST' enctype="application/x-www-form-urlencoded")
-    input(type='hidden' name='_method' value='DELETE')
-    button.alert.round.tiny DELETE
+mixin mainHeroImage(user, heroImage)
+  if !user
+    h4= heroImage.title
+    span= heroImage.link
+    img(src= heroImage.image)
+    p= heroImage.info
+  else
+    a.button.round.tiny(href='/gallery/new') Add New Image
+    h4= heroImage.title
+    span= heroImage.link
+    img(src= heroImage.image)
+    p= heroImage.info
+    a.button.info.round.tiny(href='/gallery/#{heroImage.id}/edit') Edit Image
+    form(action='/gallery/#{heroImage.id}' method='POST' enctype="application/x-www-form-urlencoded")
+      input(type='hidden' name='_method' value='DELETE')
+      button.alert.round.tiny DELETE
 
 //- creates the side column on details page
 mixin sideColumn(shuffleGallery, selectedImage)

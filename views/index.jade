@@ -6,6 +6,9 @@ include ./mixins/all
 block content
   .row
     .large-12.medium-12.small-12.columns
+      a.button.round.tiny(href='/login') Login
+  .row
+    .large-12.medium-12.small-12.columns
       img(src=imageGallery[0].image)
   +generateImageGallery(imageGallery)
 

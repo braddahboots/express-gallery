@@ -66,8 +66,7 @@ passport.use(new LocalStrategy(
         username: username
       }
     })
-    .then(function (user) {
-      console.log('user', user);
+    .then(function(user) {
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
@@ -103,7 +102,6 @@ app.get('/logout', function(req, res) {
 app.get('/', function(req, res) {
   Gallery.findAll()
     .then(function(gallery){
-      console.log('gallery', gallery);
       res.render('index', {
         imageGallery: gallery
       });

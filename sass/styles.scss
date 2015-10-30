@@ -1,5 +1,6 @@
 @import 'partials/_settings';
 @import 'foundation/components/grid';
+@import 'foundation/components/type';
 @import 'foundation/components/button-groups';
 @import 'foundation/components/buttons';
 
@@ -9,10 +10,6 @@ $LightColor: #C7C7C7;
 $DarkColor: #7E797F;
 
 // =========================Header Styles=====================
-//figure out a way to hide the a-tag in the header
- // .hidden {
-//   visibility: hidden;
-// }
 
 h1 {
   font-size: 60px;

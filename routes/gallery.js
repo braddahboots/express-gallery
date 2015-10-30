@@ -21,6 +21,7 @@ router.route('/new')
 //should include a link to edit the specific gallery photo
 router.route('/:id')
   .get(function(req, res) {
+    console.log('user', req.user);
     var photoId = req.params.id;
     Gallery.findOne({
       where : {
@@ -40,6 +41,7 @@ router.route('/:id')
         res.render('details', {
           heroImage: hero_image,
           shuffleGallery: _.shuffle(gallery),
+          user: req.user,
           selectedImage: photoId
         });
       });
