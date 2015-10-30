@@ -14,14 +14,18 @@ var ensureAuthenticated = require('./../lib');
 router.route('/new')
   .get(ensureAuthenticated, function(req, res) {
     res.render('newPhoto', {});
-});
+  });
+
+// router.route('/createuser')
+//   .get(function(req, res) {
+//     res.render('createuser', {});
+//   });
 
 //when routed to gallery/:id the user will see a single image
 //should include a link to delete the photo from the gallery
 //should include a link to edit the specific gallery photo
 router.route('/:id')
   .get(function(req, res) {
-    console.log('user', req.user);
     var photoId = req.params.id;
     Gallery.findOne({
       where : {
@@ -89,6 +93,19 @@ router.route('/')
     });
   });
 
+// // post a new instance of a user into the database
+// router.route('/')
+//   .post(function(req, res) {
+//     console.log('req', req);
+//     User.create({
+//       username: req.body.username,
+//       password: req.body.password
+//     })
+//     .then(function(gallery) {
+//       res.redirect('/');
+//     });
+//   });
+
 //renders a form to edit a gallery image by it's :id param
 router.route('/:id/edit')
   .get(ensureAuthenticated, function(req, res) {
@@ -110,24 +127,5 @@ router.route('/:id/edit')
       });
     });
 });
-
-//create a route to a Create User Page
-//create user page should render a form that takes username / password
-//once submitted should redirect to gallery route page
-router.route('/createuser')
-  .get(function(req, res) {
-    res.render('createuser', {});
-  });
-
-router.route('/')
-  .post(function(req, res) {
-    User.create({
-      username: req.body.username,
-      password: req.body.password,
-    })
-    .then(function(gallery) {
-      res.redirect('/');
-    });
-  });
 
 module.exports = router;

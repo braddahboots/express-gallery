@@ -4,7 +4,7 @@ extends ./layouts/mainLayout.jade
 include ./mixins/all
 
 block content
-  form(action="/gallery/createuser" method="POST")
+  form(action="/createuser" method="POST")
     .row
       .large-6.large-offset-3.columns
-      +newUser
+        +newUser

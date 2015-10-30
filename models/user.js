@@ -2,6 +2,8 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('users', {
     username: DataTypes.STRING,
     password: DataTypes.STRING
+    // type : DataTypes.CHAR(30),
+    // required : true
   }, {
     instanceMethods : {
       validPassword: function(password) {

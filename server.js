@@ -78,6 +78,7 @@ passport.use(new LocalStrategy(
   }
 ));
 
+// check the database to see if user exists
 app.post('/login',
   passport.authenticate('local', {successRedirect: '/',
                                   failureRedirect: '/login',
@@ -91,6 +92,41 @@ app.get('/login', function(req, res) {
 app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
+});
+
+
+//create a route to a Create User Page
+//create user page should render a form that takes username / password
+//once submitted should redirect to gallery route page
+app.get('/createuser', function(req, res) {
+    res.render('createuser', {});
+  });
+
+app.post('/createuser', function(req, res) {
+  var newUser = req.body.username;
+  var password = req.body.password;
+  var password2 = req.body.password2;
+  User.findOne({
+    where : {
+      username : newUser
+    }
+  })
+  .then(function(user) {
+    if(user) {
+      throw new Error('Username already exists');
+    }
+    else if(password !== password2) {
+      throw new Error('Passwords do not match, please re-type your passwords');
+    }else{
+      User.create({
+        username: newUser,
+        password: password
+      });
+    }
+  })
+  .then(function(gallery) {
+    res.redirect('/');
+  });
 });
 
 //root directory will render the list gallery photos located within index

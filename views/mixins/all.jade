@@ -9,6 +9,7 @@ mixin userLogin
       input(type='password' name='password')
     div
     button.round.tiny Login
+    a.button.round.tiny(href='/createuser') Create Account
 
 //- creates a login button if user is not logged in else logout button
 mixin userLoginButton(user)
@@ -108,7 +109,7 @@ mixin newUser
         input(type='text' name='username' placeholder='...')
       div
       label Password
-        input(type='password' name='password1' placeholder='...')
+        input(type='password' name='password' placeholder='...')
       div
       label Retype Password
         input(type='password' name='password2' placeholder='...')
