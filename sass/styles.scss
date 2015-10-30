@@ -53,9 +53,32 @@ p.head {
   text-align: center;
 }
 
+.heroImage {
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+
 //=====================Details Page Hero Styles=================
 h4 {
   margin: 0px;
 }
 
+.mainImage {
+  height: 450px;
+  background-size: cover;
+  background-position: center;
+}
 //=====================Details Page Side Column Styles=================
+
+
+
+
+
+
+
+//==============================Footer==============================
+.footer {
+  display: inline;
+  text-align: center;
+}

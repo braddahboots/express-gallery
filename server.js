@@ -93,17 +93,13 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-// function ensureAuthenticated(req, res, next) {
-//   if(req.isAuthenticated()) {return next(); }
-//   res.redirect('/login');
-// }
-
 //root directory will render the list gallery photos located within index
 app.get('/', function(req, res) {
   Gallery.findAll()
     .then(function(gallery){
       res.render('index', {
-        imageGallery: gallery
+        imageGallery: gallery,
+        user: req.user
       });
     });
 });

@@ -6,8 +6,9 @@ include ./mixins/all
 block content
   .row
     .large-8.medium-8.columns
-      +mainHeroImage(user, heroImage)
+      +userButtons(user)
+      +mainHeroImage(heroImage)
+      +userEditButtons(user, heroImage)
     .large-4.medium-4.columns
       +sideColumn(shuffleGallery, selectedImage)
       //- create a mixin to place a column on the right side of the page
-

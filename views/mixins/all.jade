@@ -9,7 +9,13 @@ mixin userLogin
       input(type='password' name='password')
     div
     button.round.tiny Login
-    button.round.tiney Create Account
+
+//- creates a login button if user is not logged in else logout button
+mixin userLoginButton(user)
+  if !user
+    a.button.round.tiny(href='/login') Login
+  else
+    a.button.round.tiny(href='/logout') Logout
 
 //- creates the landing page format
 mixin generateImageGallery(imageGallery)
@@ -23,30 +29,36 @@ mixin generateImageGallery(imageGallery)
             span.details= obj.title
             span.details= obj.link
 
-//- create the details page with hero image and column
-mixin mainHeroImage(user, heroImage)
+//- creates the login or logout buttons for users for the details page
+mixin userButtons(user)
   if !user
-    h4= heroImage.title
-    span= heroImage.link
-    img(src= heroImage.image)
-    p= heroImage.info
+    a.button.round.tiny(href='/login') Login
   else
     a.button.round.tiny(href='/gallery/new') Add New Image
-    h4= heroImage.title
-    span= heroImage.link
-    img(src= heroImage.image)
-    p= heroImage.info
+    a.button.round.tiny(href='/logout') Logout
+
+//- create the details page with hero image and column
+mixin mainHeroImage(heroImage)
+  h4= heroImage.title
+  span= heroImage.link
+  div.mainImage(style='background-image : url(#{heroImage.image})')
+  p= heroImage.info
+
+//- create the edit and delete button if user is logged in
+mixin userEditButtons(user, heroImage)
+  if user
     a.button.info.round.tiny(href='/gallery/#{heroImage.id}/edit') Edit Image
     form(action='/gallery/#{heroImage.id}' method='POST' enctype="application/x-www-form-urlencoded")
       input(type='hidden' name='_method' value='DELETE')
       button.alert.round.tiny DELETE
 
+
 //- creates the side column on details page
 mixin sideColumn(shuffleGallery, selectedImage)
   each obj in shuffleGallery
-      a(href='/gallery/' + obj.id): img(src= obj.image).image
-      span.details= obj.title
-      span.details= obj.link
+    a(href='/gallery/' + obj.id): img(src= obj.image).image
+    span.details= obj.title
+    span.details= obj.link
 
 //- creates the edit page format
 mixin editImage(selectedImage)
@@ -66,7 +78,6 @@ mixin editImage(selectedImage)
         div
         label Link
           input(type="text" name="link" placeholder="...")
-          input(type='hidden' name='_method' value='PUT')
         div
         label Description
           input(type="text" name="info" placeholder="...")
@@ -90,3 +101,16 @@ mixin newPhotoAdd
         textarea(type="text" name="info" placeholder="...")
       div
       button.round.tiny.success POST
+
+mixin newUser
+      div
+      label Username
+        input(type='text' name='username' placeholder='...')
+      div
+      label Password
+        input(type='password' name='password1' placeholder='...')
+      div
+      label Retype Password
+        input(type='password' name='password2' placeholder='...')
+      div
+      button.round.tiny.success New User

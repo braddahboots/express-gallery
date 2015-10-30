@@ -87,7 +87,7 @@ router.route('/')
     .then(function(gallery) {
       res.redirect('/');
     });
-});
+  });
 
 //renders a form to edit a gallery image by it's :id param
 router.route('/:id/edit')
@@ -110,5 +110,24 @@ router.route('/:id/edit')
       });
     });
 });
+
+//create a route to a Create User Page
+//create user page should render a form that takes username / password
+//once submitted should redirect to gallery route page
+router.route('/createuser')
+  .get(function(req, res) {
+    res.render('createuser', {});
+  });
+
+router.route('/')
+  .post(function(req, res) {
+    User.create({
+      username: req.body.username,
+      password: req.body.password,
+    })
+    .then(function(gallery) {
+      res.redirect('/');
+    });
+  });
 
 module.exports = router;

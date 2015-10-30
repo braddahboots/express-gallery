@@ -2627,6 +2627,23 @@ p.head {
   display: block;
   text-align: center; }
 
-/* line 57, stdin */
+/* line 56, stdin */
+.heroImage {
+  height: 400px;
+  background-size: cover;
+  background-position: center; }
+
+/* line 63, stdin */
 h4 {
   margin: 0px; }
+
+/* line 67, stdin */
+.mainImage {
+  height: 450px;
+  background-size: cover;
+  background-position: center; }
+
+/* line 81, stdin */
+.footer {
+  display: inline;
+  text-align: center; }
